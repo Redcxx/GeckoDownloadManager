@@ -41,8 +41,7 @@ function canDownload(lesson) {
 }
 
 function getVideoFileName(lesson) {
-  const { updatedAt } = lesson.lesson;
-  return updatedAt.slice(0, updatedAt.indexOf("T"));
+  return lesson.lesson.name;
 }
 
 /**

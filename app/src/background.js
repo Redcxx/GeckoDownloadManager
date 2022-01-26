@@ -28,10 +28,11 @@ async function getDownloadLink({lessonID, lessonName}, echo360Domain, downloadHD
   if (videosData.length === 0) {
     return null;
   }
-
   const downloadArray = videosData.map((videoData) => {
+    console.log('videoData');
+    console.log(videoData);
     const quality = downloadHD ? `hd` : `sd`;
-    const videoName = `video_source_${videoData.sourceIndex}_${quality}.mp4`
+    const videoName = `${quality}.mp4`
 
     if (videoData.isHls)
     {
@@ -76,7 +77,7 @@ chrome.extension.onConnect.addListener(function (port) {
           downloadArray.forEach((downloadData) => {
             chrome.downloads.download({
               url: downloadData.url,
-              filename: `Echo360_Lectures/${courseName}/${downloadData.lessonName}/${downloadData.videoName}`
+              filename: `${courseName}_${downloadData.lessonName}_${downloadData.videoName}`
             })
           })
         });
