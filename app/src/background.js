@@ -65,7 +65,8 @@ async function getDownloadLink({lessonID, lessonName}, echo360Domain, downloadHD
 chrome.extension.onConnect.addListener(function (port) {
   console.log("Connected .....");
   port.onMessage.addListener(function ({toDownload, echo360Domain, downloadHD, courseName}) {
-
+    console.log('todownload');
+    console.log(toDownload);
     toDownload.forEach((downloadable) => {
       getDownloadLink(downloadable, echo360Domain, downloadHD)
         .then((downloadArray) => {
@@ -75,9 +76,12 @@ chrome.extension.onConnect.addListener(function (port) {
           }
           
           downloadArray.forEach((downloadData) => {
+            filename = `${courseName}_${downloadData.lessonName}_${downloadData.videoName}`;
+            filename = filename.replace(/[^\w\d-_\.]/ig, '-');
+            console.log(filename);
             chrome.downloads.download({
               url: downloadData.url,
-              filename: `${courseName}_${downloadData.lessonName}_${downloadData.videoName}`
+              filename: filename
             })
           })
         });
