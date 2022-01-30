@@ -1,3 +1,6 @@
+> **About This Fork**
+> - Added proper lecture name for download file
+
 > **ATTENTION**: GeckoDM has been officially archived. 
 
 # Gecko Download Manager (geckoDM) for Echo360
